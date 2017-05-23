@@ -4,8 +4,8 @@
 namespace org.idb.medrec
 
 
-asset HealthSheet identified by hid {
-  o String hid
+asset HealthSheet identified by hsid {
+  o String hsid
   o String[] chronicConditions
   o String[] riskFactors
   o String[] allergies
