@@ -3,24 +3,34 @@
  */
 namespace org.idb.medrec
 
-enum MedicalRecordAttributeType {
-    o STRING
-    o INTEGER
-    o DATE
-}
 
-asset MedicalRecord identified by medicalRecord {
-  o String medicalRecord
-  o MedicalRecordAttribute[] attributes
+asset HealthSheet identified by hid {
+  o String hid
+  o String[] chronicConditions
+  o String[] riskFactors
+  o String[] allergies
+  o String[] other
+  o MedicationRecord[] medicationRecords
+  o DoctorVisit[] doctorVisits
   --> Employee employee
 }
 
-concept MedicalRecordAttribute{
-   o  String name
-   o  String value
-   o MedicalRecordAttributeType type
+concept MedicationRecord{
+  o String date
+  o String medication
+  o String appearance
+  o Integer quantity
+  o String startDate
+  o String endDate
 }
 
+concept DoctorVisit{
+  o String date
+  o String diagnosis
+  o String medication
+  o String durationOfMedication
+  o String results
+}
 
 abstract participant User identified by email {
   o String email
@@ -34,8 +44,8 @@ participant Employee extends User {
 participant MedicalEmployee extends User {
 }
 
-transaction UpdateMedicalRecord identified by transactionId {
+transaction UpdateHealthSheet identified by transactionId {
   o String transactionId
-  o MedicalRecord medicalRecord
+  o HealthSheet healthSheet
 }
 

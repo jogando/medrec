@@ -1,20 +1,14 @@
-<h1>
-    Home
-</h1>
-<p>
-  Check-box-like button group can be easily done with pure Angular, no custom directives necessary.
-  But we include demo here for completeness.
-</p>
-<div class="btn-group" data-toggle="buttons">
-  <label class="btn btn-primary" [class.active]="model.left">
-    <input type="checkbox" [(ngModel)]="model.left"> Left (pre-checked)
-  </label>
-  <label class="btn btn-primary" [class.active]="model.middle">
-    <input type="checkbox" [(ngModel)]="model.middle"> Middle
-  </label>
-  <label class="btn btn-primary" [class.active]="model.right">
-    <input type="checkbox" [(ngModel)]="model.right"> Right
-  </label>
+<div class="input-group">
+  <input type="text" class="form-control" placeholder="search" aria-describedby="basic-addon2">
+  <button class="input-group-addon">Search</button>
 </div>
-<hr>
-<pre>{{model | json}}</pre>
+
+<div *ngIf="searchItems">
+    <hr/>
+    <div *ngIf="searchItems.length == 0">
+        <h5>No results found.</h5>
+    </div>
+    <div *ngIf="searchItems.length > 0">
+        <h5>Results</h5>
+    </div>
+</div>

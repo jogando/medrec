@@ -1,13 +1,22 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'ngbd-buttons-checkbox',
-  templateUrl: './home.component.html'
+    selector: 'ngbd-buttons-checkbox',
+    templateUrl: './home.component.html'
 })
 export class HomeComponent {
-  model = {
-    left: true,
-    middle: false,
-    right: false
-  };
+    searchItems: SearchItem[];
+    model = {
+        left: true,
+        middle: false,
+        right: false
+    };
+
+    constructor(){
+        
+    }
+}
+
+class SearchItem {
+
 }
