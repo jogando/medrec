@@ -4,6 +4,7 @@ import { CanActivateGuard } from './services/guard.service';
 
 // Components
 import { HomeComponent } from './pages/home/home.component';
+import { HealthSheetComponent } from './pages/health-sheet/health-sheet.component';
 import { LayoutsAuthComponent } from './pages/layouts/auth/auth';
 import { LoginComponent } from './pages/login/login.component';
 
@@ -17,6 +18,11 @@ const routes: Routes = [
         canActivate: [CanActivateGuard],
         component: HomeComponent,
         path: 'home'
+      },
+      {
+        canActivate: [CanActivateGuard],
+        component: HealthSheetComponent,
+        path: 'health-sheet/:id'
       }
     ],
     component: LayoutsAuthComponent,

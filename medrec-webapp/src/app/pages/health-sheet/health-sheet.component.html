@@ -1,0 +1,97 @@
+<!--Personal data-->
+<div *ngIf="employee">
+    <div class="row">
+        <div class="col-md-6">
+            <table>
+                <tr><td><b>First name</b></td><td>{{employee?.firstName}}</td></tr>
+                <tr><td><b>Last name</b></td><td>{{employee?.lastName}}</td></tr>
+                <tr><td><b>Gender</b></td><td></td></tr>
+                <tr><td><b>Date of birth</b></td><td></td></tr>
+                <tr><td><b>Age</b></td><td></td></tr>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <table>
+                <tr><td><b>Marital Status</b></td><td></td></tr>
+                <tr><td><b>Emergency contact number</b></td><td></td></tr>
+                <tr><td><b>Phone number</b></td><td></td></tr>
+                <tr><td><b>Email</b></td><td>{{employee?.email}}</td></tr>
+            </table>
+        </div>
+    </div>
+    <hr/>
+</div>
+<div *ngIf="healthSheet">
+    <div class="row">
+        <div class="col-md-3">
+            <char-list #charListChronicConditions title="Chronic Conditions" 
+            [items]="healthSheet.chronicConditions" 
+            [originalItems]="originalHealthSheet.chronicConditions" 
+            (itemAddedEvent)="onChronicConditionAdded($event)" 
+            (itemRemovedEvent)="onChronicConditionRemoved($event)" 
+            [isEdit]="isEdit"></char-list>
+        </div>
+        <div class="col-md-3">
+            <char-list #charListRiskFactors title="Risk Factors" 
+            [items]="healthSheet.riskFactors" 
+            [originalItems]="originalHealthSheet.riskFactors" 
+            (itemAddedEvent)="onRiskFactorAdded($event)" 
+            (itemRemovedEvent)="onRiskFactorRemoved($event)" 
+            [isEdit]="isEdit"></char-list>
+        </div>
+        <div class="col-md-3">
+            <char-list #charListAllergies title="Allergies" 
+            [items]="healthSheet.allergies" 
+            [originalItems]="originalHealthSheet.allergies" 
+            (itemAddedEvent)="onAllegieAdded($event)" 
+            (itemRemovedEvent)="onAllergieRemoved($event)" 
+            [isEdit]="isEdit"></char-list>
+        </div>
+        <div class="col-md-3">
+            <char-list #charListOther title="Other" 
+            [items]="healthSheet.other" 
+            [originalItems]="originalHealthSheet.other" 
+            (itemAddedEvent)="onOtherAdded($event)" 
+            (itemRemovedEvent)="onOtherRemoved($event)" 
+            [isEdit]="isEdit"></char-list>
+        </div>
+    </div>
+
+    <hr/>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    Medication Record
+                </div>
+                <div class="card-block">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    Doctor Visits
+                </div>
+                <div class="card-block">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr/>
+</div>
+<div *ngIf="employee">
+    <div class="row">
+        <div class="col-lg-12">
+            <div *ngIf="!isEdit"><button type="button" class="btn btn-sm btn-primary" (click)="toggleEdit()">Edit</button></div>
+            <div *ngIf="isEdit"><button type="button" class="btn btn-sm btn-success" (click)="showConfirmSave()">Save</button></div>
+        </div>
+    </div>
+    <hr/>
+</div>

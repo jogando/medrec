@@ -26,17 +26,23 @@ import { AppComponent } from './app.component';
 
 import { UserService } from './services/user.service';
 import { CanActivateGuard } from './services/guard.service';
+import { ComposerService } from './services/composer.service';
+import { UtilService } from './services/util.service';
 
 import {Configuration} from './app.constants';
 
 let services = [
     UserService,
     CanActivateGuard,
-    Configuration
+    Configuration,
+    ComposerService,
+    UtilService
 ];
 
 // les pages
 import { HomeComponent } from './pages/home/home.component';
+import { HealthSheetComponent } from './pages/health-sheet/health-sheet.component';
+import { CharListComponent } from './pages/health-sheet/char-list/char-list.component';
 import { LayoutsAuthComponent } from './pages/layouts/auth/auth';
 import { LoginComponent } from './pages/login/login.component';
 
@@ -45,6 +51,8 @@ import { LoginComponent } from './pages/login/login.component';
 let pages = [
     AppComponent,
     HomeComponent,
+    HealthSheetComponent,
+    CharListComponent,
     LayoutsAuthComponent,
     LoginComponent
 ];
