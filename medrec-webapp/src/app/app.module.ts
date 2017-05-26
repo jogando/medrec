@@ -43,6 +43,7 @@ let services = [
 import { HomeComponent } from './pages/home/home.component';
 import { HealthSheetComponent } from './pages/health-sheet/health-sheet.component';
 import { CharListComponent } from './pages/health-sheet/char-list/char-list.component';
+import { AddMedicationRecordComponent } from './pages/health-sheet/add-medication-record/add-medication-record.component';
 import { LayoutsAuthComponent } from './pages/layouts/auth/auth';
 import { LoginComponent } from './pages/login/login.component';
 
@@ -53,6 +54,7 @@ let pages = [
     HomeComponent,
     HealthSheetComponent,
     CharListComponent,
+    AddMedicationRecordComponent,
     LayoutsAuthComponent,
     LoginComponent
 ];

@@ -7,6 +7,8 @@ import {ComposerService} from '../../services/composer.service';
 import {UtilService} from '../../services/util.service';
 import {Employee, HealthSheet} from '../../models/composer';
 
+declare var $:any;
+
 @Component({
     selector: 'health-sheet',
     templateUrl: './health-sheet.component.html'
@@ -74,6 +76,18 @@ export class HealthSheetComponent implements OnInit {
             );
     }
 
+    requestSaveChanges(){
+        this.composerService.updateHealthSheet(this.healthSheet)
+            .subscribe(
+                data => {
+                    //this.employee = data;
+                }, 
+                error => {
+                    console.log(error)
+                }
+            );
+    }
+
     filterEmployeeResults(results:Employee[], query:string){
         if(query == null || query == ""){
             return results;
@@ -118,6 +132,14 @@ export class HealthSheetComponent implements OnInit {
     onOtherRemoved($event){
         this.healthSheet.other
             .splice(this.healthSheet.other.indexOf($event), 1);
+    }
+
+    showNewMedicationRecord(){
+        $("#addMedicationRecordModal").modal('show');
+    }
+
+    showSaveChanges(){
+        $("#modalSaveChanges").modal('show');
     }
 
 }

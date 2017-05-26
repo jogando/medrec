@@ -32,10 +32,17 @@ concept DoctorVisit{
   o String results
 }
 
-abstract participant User identified by email {
+abstract participant User identified by username {
+  o String username
   o String email
   o String firstName
   o String lastName
+  o String gender
+  o String dateOfBirth
+  o String maritalStatus
+  o String emergencyNumber
+  o String phoneNumber
+  o String profilePicUrl
 }
 
 participant Employee extends User {

@@ -58,6 +58,20 @@ export class ComposerService {
             .catch(this.handleError);
     }
 
+    updateHealthSheet(healthSheet:ComposerModels.HealthSheet): Observable<ComposerModels.Employee>{
+        let url = this.config.server+"/UpdateHealthSheet";
+
+        var payload = {
+            healthSheet: healthSheet
+        };
+
+        return this.http.post(url,JSON.stringify(payload),this.requestOptions)
+            .map((res: Response)=>{
+                return res.json();
+            })
+            .catch(this.handleError);
+    }
+
 
     private handleError (error: Response | any) {
         let errMsg: string;
