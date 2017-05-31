@@ -1,7 +1,14 @@
 export class Employee{
+    username:string;
     email:string;
     firstName:string;
     lastName:string;
+    gender:string;
+    dateOfBirth:string;
+    maritalStatus:string;
+    emergencyNumber:string;
+    phoneNumber:string;
+    profilePicUrl:string;
 }
 
 export class MedicationRecord{

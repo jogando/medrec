@@ -35,8 +35,8 @@ export class ComposerService {
             .catch(this.handleError);
     }
 
-    getEmployeeByEmail(email:string): Observable<ComposerModels.Employee>{
-        let url = this.config.server+"/Employee/"+email;
+    getEmployeeByUsername(username:string): Observable<ComposerModels.Employee>{
+        let url = this.config.server+"/Employee/"+username;
 
         return this.http.get(url,this.requestOptions)
             .map((res: Response)=>{
@@ -45,14 +45,14 @@ export class ComposerService {
             .catch(this.handleError);
     }
 
-    getHealthSheetByEmployeeEmail(email:string): Observable<ComposerModels.HealthSheet>{
+    getHealthSheetByUsername(username:string): Observable<ComposerModels.HealthSheet>{
         let url = this.config.server+"/HealthSheet";
 
         return this.http.get(url,this.requestOptions)
             .map((res: Response)=>{
                 return res.json();
             }).map((items)=>{
-                var employeeId = "resource:org.idb.medrec.Employee#"+encodeURI(email);
+                var employeeId = "resource:org.idb.medrec.Employee#"+username;
                 return items.filter(i=>i.employee==employeeId)[0];
             })
             .catch(this.handleError);

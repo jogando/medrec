@@ -1,6 +1,6 @@
 <div class="input-group">
-  <input type="text" class="form-control" placeholder="search" aria-describedby="basic-addon2">
-  <button class="input-group-addon" (click)="requestResults()">Search</button>
+    <input type="text" class="form-control" placeholder="search" aria-describedby="basic-addon2">
+    <button class="input-group-addon" (click)="requestResults()">Search</button>
 </div>
 
 <div *ngIf="searchItems_Employee">
@@ -10,11 +10,23 @@
     </div>
     <div *ngIf="searchItems_Employee.length > 0">
         <h5>Results</h5>
-        <div *ngFor="let item of searchItems_Employee" class="panel panel-default">
-            <div class="panel-heading">{{item.firstName}} {{item.lastName}}</div>
-            <div class="panel-body">
-                Panel content
+        <div *ngFor="let item of searchItems_Employee">
+            <div class="card">
+                <div class="card-header">
+                    <a routerLink="/health-sheet/{{item.username}}" routerLinkActive="active">{{item.firstName}} {{item.lastName}}</a>
+                </div>
+                <div class="card-block">
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <img class="img-thumbnail" width="40%" src="/assets/{{item.profilePicUrl}}.png" />
+                        </div>
+                        <div class="col-xs-10">
+
+                        </div>
+                    </div>
+                </div>
             </div>
+            <br/>
         </div>
     </div>
 </div>

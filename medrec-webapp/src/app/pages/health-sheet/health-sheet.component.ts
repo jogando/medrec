@@ -43,15 +43,15 @@ export class HealthSheetComponent implements OnInit {
             this.employee = null;
             this.healthSheet = null;
             this.originalHealthSheet = null;
-            let email = params["id"];
+            let username = params["id"];
 
-            this.requestHealthSheet(email);
-            this.requestEmployee(email);
+            this.requestHealthSheet(username);
+            this.requestEmployee(username);
         });
     }
 
-    requestHealthSheet(email:string){
-        this.composerService.getHealthSheetByEmployeeEmail(email)
+    requestHealthSheet(username:string){
+        this.composerService.getHealthSheetByUsername(username)
             .subscribe(
                 data => {
                     this.healthSheet = data;
@@ -64,8 +64,8 @@ export class HealthSheetComponent implements OnInit {
             );
     }
 
-    requestEmployee(email:string){
-        this.composerService.getEmployeeByEmail(email)
+    requestEmployee(username:string){
+        this.composerService.getEmployeeByUsername(username)
             .subscribe(
                 data => {
                     this.employee = data;
