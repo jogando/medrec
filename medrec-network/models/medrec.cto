@@ -3,7 +3,6 @@
  */
 namespace org.idb.medrec
 
-
 asset HealthSheet identified by hsid {
   o String hsid
   o String[] chronicConditions
@@ -51,8 +50,7 @@ participant Employee extends User {
 participant MedicalEmployee extends User {
 }
 
-transaction UpdateHealthSheet identified by transactionId {
-  o String transactionId
+transaction UpdateHealthSheet{
   o HealthSheet healthSheet
 }
 
