@@ -12,7 +12,7 @@ curl -X POST --header 'Content-Type: application/json' --header 'Accept: applica
    "maritalStatus": "Single",  
    "emergencyNumber": "(202) 432 9483",  
    "phoneNumber": "(202) 332 4166",  
-   "profilePicUrl": "string"  
+   "profilePicUrl": "profilePic/1.png"  
  }' 'http://localhost:3000/api/Employee'
 
  curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{  
@@ -26,7 +26,7 @@ curl -X POST --header 'Content-Type: application/json' --header 'Accept: applica
    "maritalStatus": "Married",  
    "emergencyNumber": "(202) 223 5435",  
    "phoneNumber": "(202) 993 1235",  
-   "profilePicUrl": "string"  
+   "profilePicUrl": "profilePic/3.png"  
  }' 'http://localhost:3000/api/Employee'
 
   curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{  
@@ -40,7 +40,7 @@ curl -X POST --header 'Content-Type: application/json' --header 'Accept: applica
    "maritalStatus": "Married",  
    "emergencyNumber": "(202) 433 1234",  
    "phoneNumber": "(202) 345 9949",  
-   "profilePicUrl": "string"  
+   "profilePicUrl": "profilePic/2.png"  
  }' 'http://localhost:3000/api/Employee'
 
  #Health Sheets
@@ -49,13 +49,14 @@ curl -X POST --header 'Content-Type: application/json' --header 'Accept: applica
    "$class": "org.idb.medrec.HealthSheet",  
    "hsid": "hsid:1",  
    "chronicConditions": [  
-     "string"  
+     "Hypertension"  
    ],  
    "riskFactors": [  
-     "string"  
+     "Coronary Artery Disease"  
    ],  
    "allergies": [  
-     "string"  
+     "Penicilin",
+     "Codein"    
    ],  
    "other": [  
      "string"  
@@ -63,24 +64,33 @@ curl -X POST --header 'Content-Type: application/json' --header 'Accept: applica
    "medicationRecords": [  
      {  
        "$class": "org.idb.medrec.MedicationRecord",  
-       "date": "string",  
-       "medication": "string",  
-       "appearance": "string",  
-       "quantity": 0,  
-       "startDate": "string",  
-       "endDate": "string",  
+       "date": "05/06/2017",  
+       "medication": "Aspirin",  
+       "appearance": "White",  
+       "quantity": 2,  
+       "startDate": "05/06/2017",  
+       "endDate": "05/06/2017",  
        "id": "string"  
      }  
    ],  
    "doctorVisits": [  
      {  
        "$class": "org.idb.medrec.DoctorVisit",  
-       "date": "string",  
-       "diagnosis": "string",  
-       "medication": "string",  
-       "durationOfMedication": "string",  
-       "results": "string",  
-       "id": "string"  
+       "date": "05/06/2016",  
+       "diagnosis": "Everything is ok",  
+       "medication": "none",  
+       "durationOfMedication": "none",  
+       "results": "",  
+       "id": ""  
+     },
+     {  
+       "$class": "org.idb.medrec.DoctorVisit",  
+       "date": "15/07/2017",  
+       "diagnosis": "High cholesterol levels",  
+       "medication": "Atorvastatin",  
+       "durationOfMedication": "6 months",  
+       "results": "",  
+       "id": ""  
      }  
    ],  
    "employee": "resource:org.idb.medrec.Employee#username:jsmith"  
