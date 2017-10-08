@@ -1,3 +1,10 @@
+<div *ngIf="!isCurrentVersion">
+    <div class="alert alert-warning" role="alert">
+        <strong>Warning!</strong> You are looking to an historical version of the data. Click <a routerLink="/health-sheet/{{employee.username}}/current"
+            routerLinkActive="active">here</a> to open the current version.
+    </div>
+</div>
+
 <!--Personal data-->
 <div *ngIf="employee">
     <div class="row">
@@ -129,21 +136,25 @@
                     </tbody>
                 </table>
             </div>
+            <div *ngIf="isEdit"><button type="button" class="btn btn-sm btn-primary" (click)="showNewMedicationRecord()">Add</button></div>
         </div>
     </div>
     <hr/>
 </div>
-<div *ngIf="employee">
-    <div class="row">
-        <div class="col-lg-12">
-            <div *ngIf="!isEdit"><button type="button" class="btn btn-sm btn-primary" (click)="toggleEdit()">Edit</button></div>
-            <div *ngIf="isEdit"><button type="button" class="btn btn-sm btn-success" (click)="showSaveChanges()">Save</button></div>
+<div *ngIf="isCurrentVersion">
+    <div *ngIf="employee">
+        <div class="row">
+            <div class="col-lg-12">
+                <div *ngIf="!isEdit"><button type="button" class="btn btn-sm btn-primary" (click)="toggleEdit()">Edit</button></div>
+                <div *ngIf="isEdit"><button type="button" class="btn btn-sm btn-success" (click)="showSaveChanges()">Save</button></div>
+            </div>
         </div>
+        <hr/>
     </div>
-    <hr/>
 </div>
 
-<add-medication-record></add-medication-record>
+
+<add-medication-record (itemAddedEvent)="onMedicationRecordAdded($event)"></add-medication-record>
 
 <div class="modal fade" id="modalSaveChanges" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -163,4 +174,18 @@
             </div>
         </div>
     </div>
+</div>
+<button type="button" class="btn btn-sm btn-link" (click)="showNewMedicationRecord()">Show transaction log</button>
+
+<div *ngIf="isShowTransactionLog">
+    <table>
+        <tr>
+            <td><b>Transaction ID</b></td>
+            <td><b>Timestamp</b></td>
+        </tr>
+        <tr *ngFor="let item of updateHealthsheetTransactionLog">
+                <td><a routerLink="/health-sheet/{{employee.username}}/{{item.transactionId}}" routerLinkActive="active">{{item.transactionId}}</a></td>
+            <td>{{item.timestamp}}</td>
+        </tr>
+    </table>
 </div>

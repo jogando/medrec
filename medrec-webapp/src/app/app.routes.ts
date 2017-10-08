@@ -22,7 +22,7 @@ const routes: Routes = [
       {
         canActivate: [CanActivateGuard],
         component: HealthSheetComponent,
-        path: 'health-sheet/:id'
+        path: 'health-sheet/:id/:version'
       }
     ],
     component: LayoutsAuthComponent,

@@ -10,32 +10,32 @@
             <div class="modal-body">
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon1">Date</span>
-                    <input type="text" class="form-control" aria-describedby="basic-addon1">
+                    <input type="text" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="newItem.date">
                 </div>
                 <br/>
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon1">Medication</span>
-                    <input type="text" class="form-control" aria-describedby="basic-addon1">
+                    <input type="text" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="newItem.medication">
                 </div>
                 <br/>
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon1">Appearance</span>
-                    <input type="text" class="form-control" aria-describedby="basic-addon1">
+                    <input type="text" class="form-control" aria-describedby="basic-addon1"  [(ngModel)]="newItem.appearance">
                 </div>
                 <br/>
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon1">Quantity</span>
-                    <input type="text" class="form-control" aria-describedby="basic-addon1">
+                    <input type="text" class="form-control" aria-describedby="basic-addon1"  [(ngModel)]="newItem.quantity">
                 </div>
                 <br/>
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon1">Start date</span>
-                    <input type="text" class="form-control" aria-describedby="basic-addon1">
+                    <input type="text" class="form-control" aria-describedby="basic-addon1"  [(ngModel)]="newItem.startDate">
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary">Ok</button>
+                <button type="button" class="btn btn-primary" (click)="onOkClicked()">Ok</button>
             </div>
         </div>
     </div>

@@ -45,6 +45,19 @@ export class ComposerService {
             .catch(this.handleError);
     }
 
+    getUpdateHealthsheetTransactionLog(username:string): Observable<any>{
+        let url = this.config.server+"/UpdateHealthSheet";
+
+        return this.http.get(url,this.requestOptions)
+            .map((res: Response)=>{
+                return res.json();
+            }).map((items)=>{
+                var employeeId = "resource:org.idb.medrec.Employee#"+username;
+                return items.filter(i=>i.healthSheet.employee==employeeId);
+            })
+            .catch(this.handleError);
+    }
+
     getHealthSheetByUsername(username:string): Observable<ComposerModels.HealthSheet>{
         let url = this.config.server+"/HealthSheet";
 

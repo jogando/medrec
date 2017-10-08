@@ -8,17 +8,22 @@
                 <span *ngIf="item.isNew" class="badge badge-primary">new</span>
                 <span *ngIf="item.isDeleted" class="badge badge-danger">delete</span>
                 {{item.item}}
-                <span *ngIf="isEdit"><button class="btn btn-outline-secondary btn-sm" (click)="onRemoveClicked(item.item)"><img width="10px" height="10px" src="/assets/icons/png/glyphicons-208-remove.png"/></button></span>
+                <span *ngIf="isEdit"><button class="btn btn-link btn-xs" (click)="onRemoveClicked(item.item)">X</button></span>
             </li>
         </ul>
         <div *ngIf="isEdit">
-            <hr/>
-            <div class="input-group">
-                <input name="txtNewItem"  [(ngModel)]="newItem" type="text" class="form-control" placeholder="">
-                <span class="input-group-btn">
-                    <button class="btn btn-secondary" type="button" (click)="onAddClicked()">Add</button>
-                </span>
+            <div class="row">
+                <div class="col-md-12">
+                        <hr/>
+                        <div class="input-group">
+                            <input name="txtNewItem"  [(ngModel)]="newItem" type="text" class="form-control" placeholder="">
+                            <span class="input-group-btn">
+                                <button class="btn btn-secondary" type="button" (click)="onAddClicked()">Add</button>
+                            </span>
+                        </div>
+                </div>
             </div>
+            
         </div>
     </div>
 </div>

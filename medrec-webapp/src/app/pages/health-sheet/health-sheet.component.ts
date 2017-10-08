@@ -21,8 +21,11 @@ export class HealthSheetComponent implements OnInit {
     employee: Employee;
     originalHealthSheet:HealthSheet;
     healthSheet:HealthSheet;
-
+    updateHealthsheetTransactionLog:any[];
     isEdit:boolean;
+    isShowTransactionLog:boolean;
+    selectedVersion:string;
+    isCurrentVersion:boolean;
 
     constructor(private config:Configuration,
         private http: Http, 
@@ -40,16 +43,22 @@ export class HealthSheetComponent implements OnInit {
     ngOnInit(){
         this.route.params.subscribe(params => {
             this.isEdit = false;
+            this.isShowTransactionLog = true;
             this.employee = null;
             this.healthSheet = null;
             this.originalHealthSheet = null;
             let username = params["id"];
+            this.selectedVersion = params["version"];
 
-            this.requestHealthSheet(username);
+            this.isCurrentVersion = this.selectedVersion == "current";
+
+            //this.requestHealthSheet(username);
             this.requestEmployee(username);
+            this.requestUpdateHealthsheetTransactionLog(username);
         });
     }
 
+    /*
     requestHealthSheet(username:string){
         this.composerService.getHealthSheetByUsername(username)
             .subscribe(
@@ -62,7 +71,7 @@ export class HealthSheetComponent implements OnInit {
                     console.log(error)
                 }
             );
-    }
+    }*/
 
     requestEmployee(username:string){
         this.composerService.getEmployeeByUsername(username)
@@ -80,7 +89,31 @@ export class HealthSheetComponent implements OnInit {
         this.composerService.updateHealthSheet(this.healthSheet)
             .subscribe(
                 data => {
+                    var test = "";
                     //this.employee = data;
+                }, 
+                error => {
+                    console.log(error)
+                }
+            );
+    }
+
+    requestUpdateHealthsheetTransactionLog(username:string){
+        var selectedVersion = this.selectedVersion;
+        this.composerService.getUpdateHealthsheetTransactionLog(username)
+            .subscribe(
+                data => {
+                    this.updateHealthsheetTransactionLog = data;
+                    var healthSheet = null;
+                    if(this.selectedVersion =="current"){
+                        healthSheet = data[0].healthSheet;
+                    }else{
+                        healthSheet = data.filter(i=>i.transactionId == selectedVersion)[0].healthSheet;
+                    }
+
+                    this.healthSheet = healthSheet;
+                    this.originalHealthSheet = JSON.parse(JSON.stringify(healthSheet));
+
                 }, 
                 error => {
                     console.log(error)
@@ -132,6 +165,11 @@ export class HealthSheetComponent implements OnInit {
     onOtherRemoved($event){
         this.healthSheet.other
             .splice(this.healthSheet.other.indexOf($event), 1);
+    }
+
+    onMedicationRecordAdded($event){
+        $("#addMedicationRecordModal").modal('hide');
+        this.healthSheet.medicationRecords.push($event);
     }
 
     showNewMedicationRecord(){
