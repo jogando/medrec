@@ -43,7 +43,7 @@ export class HealthSheetComponent implements OnInit {
     ngOnInit(){
         this.route.params.subscribe(params => {
             this.isEdit = false;
-            this.isShowTransactionLog = true;
+            this.isShowTransactionLog = false;
             this.employee = null;
             this.healthSheet = null;
             this.originalHealthSheet = null;
@@ -89,8 +89,7 @@ export class HealthSheetComponent implements OnInit {
         this.composerService.updateHealthSheet(this.healthSheet)
             .subscribe(
                 data => {
-                    var test = "";
-                    //this.employee = data;
+                    $("#modalSaveChanges").modal('hide');
                 }, 
                 error => {
                     console.log(error)
@@ -104,9 +103,12 @@ export class HealthSheetComponent implements OnInit {
             .subscribe(
                 data => {
                     this.updateHealthsheetTransactionLog = data;
+                    data.sort(function(a,b){
+                        return new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime();
+                    });
                     var healthSheet = null;
                     if(this.selectedVersion =="current"){
-                        healthSheet = data[0].healthSheet;
+                        healthSheet = data[data.length-1].healthSheet;
                     }else{
                         healthSheet = data.filter(i=>i.transactionId == selectedVersion)[0].healthSheet;
                     }
@@ -129,6 +131,10 @@ export class HealthSheetComponent implements OnInit {
 
     toggleEdit(){
         this.isEdit = !this.isEdit;
+    }
+
+    toggleTransactionLog(){
+        this.isShowTransactionLog = !this.isShowTransactionLog;
     }
 
     onChronicConditionAdded($event){

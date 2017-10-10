@@ -93,6 +93,7 @@
                             <th>Appearance</th>
                             <th>Quantity</th>
                             <th>Start date</th>
+                            <th>End date</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -102,6 +103,7 @@
                             <td>{{item.appearance}}</td>
                             <td>{{item.quantity}}</td>
                             <td>{{item.startDate}}</td>
+                            <td>{{item.endDate}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -136,7 +138,7 @@
                     </tbody>
                 </table>
             </div>
-            <div *ngIf="isEdit"><button type="button" class="btn btn-sm btn-primary" (click)="showNewMedicationRecord()">Add</button></div>
+            <div *ngIf="isEdit"><button type="button" class="btn btn-sm btn-primary">Add</button></div>
         </div>
     </div>
     <hr/>
@@ -175,17 +177,26 @@
         </div>
     </div>
 </div>
-<button type="button" class="btn btn-sm btn-link" (click)="showNewMedicationRecord()">Show transaction log</button>
+<button type="button" class="btn btn-sm btn-link" (click)="toggleTransactionLog()">Show transaction log</button>
 
 <div *ngIf="isShowTransactionLog">
     <table>
         <tr>
-            <td><b>Transaction ID</b></td>
             <td><b>Timestamp</b></td>
         </tr>
-        <tr *ngFor="let item of updateHealthsheetTransactionLog">
-                <td><a routerLink="/health-sheet/{{employee.username}}/{{item.transactionId}}" routerLinkActive="active">{{item.transactionId}}</a></td>
-            <td>{{item.timestamp}}</td>
+        <tr *ngFor="let item of updateHealthsheetTransactionLog; let i = index">
+            <td>
+                <div *ngIf="i == updateHealthsheetTransactionLog.length -1">
+                    <a routerLink="/health-sheet/{{employee.username}}/current" routerLinkActive="active">
+                        {{item.timestamp}} [current]
+                    </a>
+                </div>
+                <div *ngIf="i < updateHealthsheetTransactionLog.length -1">
+                    <a routerLink="/health-sheet/{{employee.username}}/{{item.transactionId}}" routerLinkActive="active">
+                        {{item.timestamp}} 
+                    </a>
+                </div>
+            </td>
         </tr>
     </table>
 </div>
