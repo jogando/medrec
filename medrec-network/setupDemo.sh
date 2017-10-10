@@ -148,6 +148,5 @@ curl -X POST --header 'Content-Type: application/json' --header 'Accept: applica
      }  
    ],  
    "employee": "resource:org.idb.medrec.Employee#username:jsmith"
-   },  
-   "timestamp": "2017-10-10T12:01:24.601Z"  
+   }  
  }' 'http://localhost:3000/api/UpdateHealthSheet'
