@@ -17,14 +17,13 @@ ARCH=$ARCH docker-compose -f "${DIR}"/composer/docker-compose.yml up -d
 
 # wait for Hyperledger Fabric to start
 # incase of errors when running later commands, issue export FABRIC_START_TIMEOUT=<larger number>
-export FABRIC_START_TIMEOUT=20
+export FABRIC_START_TIMEOUT=60
 echo ${FABRIC_START_TIMEOUT}
 sleep ${FABRIC_START_TIMEOUT}
 
 pwd
 
 #docker rm -f $(docker ps -aq)
-#sudo docker rm -f $(sudo docker ps -aq)
 
 # Create the channel
 docker exec peer0.org1.example.com peer channel create -o orderer.example.com:7050 -c composerchannel -f /etc/hyperledger/configtx/composer-channel.tx
