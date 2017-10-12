@@ -24,19 +24,21 @@ sleep ${FABRIC_START_TIMEOUT}
 pwd
 
 #docker rm -f $(docker ps -aq)
+#sudo docker rm -f $(sudo docker ps -aq)
 
 # Create the channel
-docker exec peer0.org1.example.com peer channel create -o orderer.example.com:7050 -c composerchannel -f /etc/hyperledger/configtx/composer-channel.tx
+sudo docker exec peer0.org1.example.com peer channel create -o orderer.example.com:7050 -c composerchannel -f /etc/hyperledger/configtx/composer-channel.tx
 
 #copy the channel block
-docker exec peer0.org1.example.com cp ./composerchannel.block /etc/hyperledger/shared
+sudo docker exec peer0.org1.example.com cp ./composerchannel.block /etc/hyperledger/shared
 
 # Join peer0.org1.example.com to the channel.
-docker exec -e "CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org1.example.com/msp" peer0.org1.example.com peer channel join -b /etc/hyperledger/shared/composerchannel.block
-docker exec -e "CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org1.example.com/msp" peer1.org1.example.com peer channel join -b /etc/hyperledger/shared/composerchannel.block
+sudo docker exec -e "CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org1.example.com/msp" peer0.org1.example.com peer channel join -b /etc/hyperledger/shared/composerchannel.block
+sudo docker exec -e "CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org1.example.com/msp" peer1.org1.example.com peer channel join -b /etc/hyperledger/shared/composerchannel.block
 
 #docker run -p 9090:9090 -e HYP_REST_ENDPOINT=http://192.168.0.106:7050 yeasy/blockchain-explorer
 
 cd ../..
 
+#ssh -L 3000:localhost:3000 -i "linux_ubuntu.pem" ubuntu@ec2-52-91-92-243.compute-1.amazonaws.com
 #docker exec peer0.org1.example.com peer channel fetch newest -c composerchannel -o orderer.example.com:7050

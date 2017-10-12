@@ -10,7 +10,7 @@ composer network deploy -a ../dist/my-network.bna -p hlfv1 -i PeerAdmin -s rando
 
 
 source envvars0.txt
-docker run \
+sudo docker run \
     -d \
     -e COMPOSER_CONNECTION_PROFILE=${COMPOSER_CONNECTION_PROFILE} \
     -e COMPOSER_BUSINESS_NETWORK=${COMPOSER_BUSINESS_NETWORK} \
@@ -24,12 +24,12 @@ docker run \
     -e COMPOSER_PROVIDERS="${COMPOSER_PROVIDERS}" \
     --name composer-rest0 \
     --network composer_default \
-    --mount type=bind,source=/Users/jogando/.composer-credentials,target=/home/composer/.composer-credentials \
+    --mount type=bind,source=/home/ubuntu/.composer-credentials,target=/home/composer/.composer-credentials \
     -p 3000:3000 \
     hyperledger/composer-rest-server
 
 source envvars1.txt
-docker run \
+sudo docker run \
     -d \
     -e COMPOSER_CONNECTION_PROFILE=${COMPOSER_CONNECTION_PROFILE} \
     -e COMPOSER_BUSINESS_NETWORK=${COMPOSER_BUSINESS_NETWORK} \
@@ -43,7 +43,7 @@ docker run \
     -e COMPOSER_PROVIDERS="${COMPOSER_PROVIDERS}" \
     --name composer-rest1 \
     --network composer_default \
-    --mount type=bind,source=/Users/jogando/.composer-credentials,target=/home/composer/.composer-credentials \
+    --mount type=bind,source=/home/ubuntu/.composer-credentials,target=/home/composer/.composer-credentials \
     -p 3001:3000 \
     hyperledger/composer-rest-server
 
