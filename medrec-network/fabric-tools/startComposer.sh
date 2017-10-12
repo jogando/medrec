@@ -10,7 +10,7 @@ composer network deploy -a ../dist/my-network.bna -p hlfv1 -i PeerAdmin -s rando
 
 
 source envvars0.txt
-sudo docker run \
+docker run \
     -d \
     -e COMPOSER_CONNECTION_PROFILE=${COMPOSER_CONNECTION_PROFILE} \
     -e COMPOSER_BUSINESS_NETWORK=${COMPOSER_BUSINESS_NETWORK} \
@@ -29,7 +29,7 @@ sudo docker run \
     hyperledger/composer-rest-server
 
 source envvars1.txt
-sudo docker run \
+docker run \
     -d \
     -e COMPOSER_CONNECTION_PROFILE=${COMPOSER_CONNECTION_PROFILE} \
     -e COMPOSER_BUSINESS_NETWORK=${COMPOSER_BUSINESS_NETWORK} \
