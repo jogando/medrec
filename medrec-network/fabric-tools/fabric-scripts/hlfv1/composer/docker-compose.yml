@@ -8,22 +8,10 @@ services:
       - FABRIC_CA_SERVER_CA_NAME=ca.org1.example.com
     ports:
       - 7054:7054
-    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.org1.example.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/19ab65abbb04807dad12e4c0a9aaa6649e70868e3abd0217a322d89e47e1a6ae_sk -b admin:adminpw -d'
+    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.org1.example.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/21e679e85249a923a47e5656f01aace8588ec3d78d610bc04b17ac0076ec21b5_sk -b admin:adminpw -d'
     volumes:
       - ./crypto-config/peerOrganizations/org1.example.com/ca/:/etc/hyperledger/fabric-ca-server-config
     container_name: ca.org1.example.com
-  
-  ca.org2.example.com:
-    image: hyperledger/fabric-ca:$ARCH-1.0.1
-    environment:
-      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
-      - FABRIC_CA_SERVER_CA_NAME=ca.org2.example.com
-    ports:
-      - 8054:7054
-    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.org2.example.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/19ab65abbb04807dad12e4c0a9aaa6649e70868e3abd0217a322d89e47e1a6ae_sk -b admin:adminpw -d'
-    volumes:
-      - ./crypto-config/peerOrganizations/org2.example.com/ca/:/etc/hyperledger/fabric-ca-server-config
-    container_name: ca.org2.example.com
 
   orderer.example.com:
     container_name: orderer.example.com
@@ -42,20 +30,6 @@ services:
     volumes:
         - ./:/etc/hyperledger/configtx
         - ./crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp:/etc/hyperledger/msp/orderer/msp
-
-  cli:
-    image: hyperledger/fabric-tools:$ARCH-1.0.1
-    container_name: fabric-cli
-    hostname: fabric-cli
-    tty: true
-    volumes:
-          - /var/run/:/host/var/run/
-          - ./:/etc/hyperledger/configtx
-          - ./crypto-config/peerOrganizations:/etc/hyperledger/peerOrganizations
-    environment:
-      #- GOPATH=/opt/gopath
-      - CORE_LOGGING_LEVEL=DEBUG
-      - CORE_PEER_TLS_ENABLED=true  # to enable TLS, change to true
 
   peer0.org1.example.com:
     container_name: peer0.org1.example.com
@@ -86,17 +60,17 @@ services:
       - orderer.example.com
       - couchdb1
 
-  peer0.org2.example.com:
-    container_name: peer0.org2.example.com
+  peer1.org1.example.com:
+    container_name: peer1.org1.example.com
     image: hyperledger/fabric-peer:$ARCH-1.0.1
     environment:
       - CORE_LOGGING_PEER=debug
       - CORE_CHAINCODE_LOGGING_LEVEL=DEBUG
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
-      - CORE_PEER_ID=peer0.org2.example.com
-      - CORE_PEER_ADDRESS=peer0.org2.example.com:7051
+      - CORE_PEER_ID=peer1.org1.example.com
+      - CORE_PEER_ADDRESS=peer1.org1.example.com:7051
       - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=composer_default
-      - CORE_PEER_LOCALMSPID=Org2MSP
+      - CORE_PEER_LOCALMSPID=Org1MSP
       - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/peer/msp
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb2:5984
@@ -108,8 +82,8 @@ services:
     volumes:
         - /var/run/:/host/var/run/
         - ./:/etc/hyperledger/configtx
-        - ./crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/msp:/etc/hyperledger/peer/msp
-        - ./crypto-config/peerOrganizations/org2.example.com/users:/etc/hyperledger/msp/users
+        - ./crypto-config/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/msp:/etc/hyperledger/peer/msp
+        - ./crypto-config/peerOrganizations/org1.example.com/users:/etc/hyperledger/msp/users
         - ./shared:/etc/hyperledger/shared
     depends_on:
       - orderer.example.com
@@ -130,3 +104,25 @@ services:
       - 6984:5984
     environment:
       DB_URL: http://localhost:5984/member_db
+
+  couchdb2:
+    container_name: couchdb2
+    image: hyperledger/fabric-couchdb:$ARCH-1.0.1
+    ports:
+      - 6984:5984
+    environment:
+      DB_URL: http://localhost:5984/member_db
+
+  webapp0:
+    container_name: webapp0
+    image: angular-client:dev
+    ports:
+      - 8080:4200
+    command: ng serve --proxy-config proxy.config.peer0.json -H 0.0.0.0
+
+  webapp1:
+    container_name: webapp1
+    image: angular-client:dev
+    ports:
+      - 8081:4200
+    command: ng serve --proxy-config proxy.config.peer1.json -H 0.0.0.0

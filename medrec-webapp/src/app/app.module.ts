@@ -27,6 +27,7 @@ import { AppComponent } from './app.component';
 import { UserService } from './services/user.service';
 import { CanActivateGuard } from './services/guard.service';
 import { ComposerService } from './services/composer.service';
+import { ComposerEventsService } from './services/composer-events.service';
 import { UtilService } from './services/util.service';
 
 import {Configuration} from './app.constants';
@@ -36,6 +37,7 @@ let services = [
     CanActivateGuard,
     Configuration,
     ComposerService,
+    ComposerEventsService,
     UtilService
 ];
 

@@ -1,0 +1,12 @@
+{
+    "/api/*":{
+        "target":"http://composer-rest0:3000",
+        "secure":false,
+        "logLevel":"debug"
+    },"/ws":{
+        "target":"http://composer-rest0:3000",
+        "secure":false,
+        "logLevel":"debug",
+        "ws":true
+    }
+}

@@ -5,15 +5,19 @@
     <div class="header clearfix">
         <nav>
             <ul class="nav nav-pills float-right">
-            <li class="nav-item">
-                <a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Contact</a>
-            </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+                <li *ngIf="composerEvents.length >0" class="nav-item">
+                        <button (click)="onShowHyperledgerEvents()" class="btn btn-info">{{composerEvents.length}}</button>
+                    </li>
             </ul>
         </nav>
         <h3 class="text-muted">Medical records</h3>
@@ -23,6 +27,24 @@
 
     <router-outlet></router-outlet>
 
+    <div class="modal fade" id="showComposerEventsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Hyperledger Evets</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <div *ngFor="let item of composerEvents">
+                        <h5>{{item.timestamp}}</h5>
+                        <b>Updated object:</b>{{item.healthSheet}}
+                        <hr/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
-

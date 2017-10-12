@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Configuration } from '../../app.constants';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { Observable, ReplaySubject } from 'rxjs/Rx';
 import {ComposerService} from '../../services/composer.service';
 import {UtilService} from '../../services/util.service';
 import {Employee, HealthSheet} from '../../models/composer';

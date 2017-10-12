@@ -1,0 +1,2 @@
+2017-10-11T19:24:30.062Z ERROR   HLFConnectionManager    :fabric-client()          [client-utils.js]: sendPeersProposal - Promise is rejected: Error: The creator's signature over the proposal is not valid, err The signature is invalid
+    at /usr/local/lib/node_modules/composer-cli/node_modules/fabric-client/node_modules/grpc/src/node/src/client.js:434:17 {}$

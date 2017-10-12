@@ -28,14 +28,6 @@ PeerOrgs:
     Domain: org1.example.com
     
     Template:
-      Count: 1
-    Users:
-      Count: 0
-
-  - Name: Org2
-    Domain: org2.example.com
-    
-    Template:
-      Count: 1
+      Count: 2
     Users:
       Count: 0

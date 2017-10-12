@@ -33,7 +33,10 @@ docker exec peer0.org1.example.com cp ./composerchannel.block /etc/hyperledger/s
 
 # Join peer0.org1.example.com to the channel.
 docker exec -e "CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org1.example.com/msp" peer0.org1.example.com peer channel join -b /etc/hyperledger/shared/composerchannel.block
-docker exec -e "CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org2.example.com/msp" peer0.org2.example.com peer channel join -b /etc/hyperledger/shared/composerchannel.block
+docker exec -e "CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org1.example.com/msp" peer1.org1.example.com peer channel join -b /etc/hyperledger/shared/composerchannel.block
 
+#docker run -p 9090:9090 -e HYP_REST_ENDPOINT=http://192.168.0.106:7050 yeasy/blockchain-explorer
 
 cd ../..
+
+#docker exec peer0.org1.example.com peer channel fetch newest -c composerchannel -o orderer.example.com:7050

@@ -54,3 +54,7 @@ transaction UpdateHealthSheet{
   o HealthSheet healthSheet
 }
 
+event UpdateHealthSheetEvent {
+  --> HealthSheet healthSheet
+}
+
