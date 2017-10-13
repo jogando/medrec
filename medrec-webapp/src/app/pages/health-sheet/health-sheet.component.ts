@@ -25,6 +25,7 @@ export class HealthSheetComponent implements OnInit {
     isShowTransactionLog:boolean;
     selectedVersion:string;
     isCurrentVersion:boolean;
+    isSavingChanges:boolean;
 
     constructor(private config:Configuration,
         private http: Http, 
@@ -43,6 +44,7 @@ export class HealthSheetComponent implements OnInit {
         this.route.params.subscribe(params => {
             this.isEdit = false;
             this.isShowTransactionLog = false;
+            this.isSavingChanges = false;
             this.employee = null;
             this.healthSheet = null;
             this.originalHealthSheet = null;
@@ -85,13 +87,18 @@ export class HealthSheetComponent implements OnInit {
     }
 
     requestSaveChanges(){
+        this.isSavingChanges = true;
+        var self = this;
         this.composerService.updateHealthSheet(this.healthSheet)
             .subscribe(
                 data => {
+                    self.isSavingChanges = false;
+                    self.isEdit = false;
                     $("#modalSaveChanges").modal('hide');
                 }, 
                 error => {
-                    console.log(error)
+                    console.log(error);
+                    alert(error);
                 }
             );
     }

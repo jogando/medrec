@@ -169,6 +169,9 @@
             </div>
             <div class="modal-body">
                 Are you sure you want to save the changes?
+                <div *ngIf="isSavingChanges">
+                    <img style="width:15px;height:15px" src="/assets/loading.gif"/>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

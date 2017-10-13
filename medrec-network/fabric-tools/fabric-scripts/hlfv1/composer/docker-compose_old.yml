@@ -119,10 +119,3 @@ services:
     ports:
       - 8080:4200
     command: ng serve --proxy-config proxy.config.peer0.json -H 0.0.0.0 --disable-host-check
-
-  webapp1:
-    container_name: webapp1
-    image: angular-client:dev
-    ports:
-      - 8081:4200
-    command: ng serve --proxy-config proxy.config.peer1.json -H 0.0.0.0 --disable-host-check
